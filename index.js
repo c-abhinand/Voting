@@ -13,18 +13,8 @@ const candidates = [
     symbol: "assets/randila.png",
     photo: "assets/candidate.JPG", // NEW: candidate image
   },
-  {
-    slno: 2,
-   
-  },
-  {
-    slno: 3,
-    
-  },
-  {
-    slno: 4,
-    
-  },
+ 
+
 ];
 
 // ---------------- STATE ----------------
