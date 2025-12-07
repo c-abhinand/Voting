@@ -1,4 +1,7 @@
-/* ---------- Global ---------- */
+/* ======================
+   GLOBAL / LAYOUT
+   Mobile-first
+   ====================== */
 
 * {
   box-sizing: border-box;
@@ -9,36 +12,38 @@
 body {
   font-family: "Noto Sans Malayalam", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  background: #e5e7eb;
+  background: #f3f4f6;
   color: #111827;
 }
 
 .page {
-  max-width: 900px;
-  margin: 24px auto 40px;
-  padding: 0 16px;
+  max-width: 480px;            /* mobile card width */
+  margin: 16px auto 32px;
+  padding: 0 12px;
 }
 
-/* ---------- Top Tabs (Ward / Block / District) ---------- */
+/* ======================
+   TOP TABS (Ward/Block/District)
+   ====================== */
 
 .top-tabs {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .tab {
-  min-width: 140px;
-  padding: 8px 18px;
-  font-size: 14px;
+  flex: 1;
+  padding: 6px 0;
+  font-size: 13px;
   border-radius: 999px;
   border: 1px solid #9ca3af;
   background: #d1d5db;
   color: #111827;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) inset;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .tab--active {
@@ -46,31 +51,33 @@ body {
   color: #f9fafb;
 }
 
-/* ---------- EVM Device ---------- */
+/* ======================
+   EVM DEVICE SHELL
+   ====================== */
 
 .evm-device {
   background: #f5f5f5;
-  border-radius: 28px;
-  border: 3px solid #d4d4d8;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
-  padding: 16px;
+  border-radius: 24px;
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+  padding: 10px;
 }
 
 /* Header strip */
 
 .evm-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   background: #f9fafb;
   border-radius: 18px 18px 12px 12px;
   border: 1px solid #e4e4e7;
-  padding: 12px 24px;
-  margin-bottom: 12px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
 }
 
 .evm-header-section {
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   font-weight: 600;
 }
@@ -85,13 +92,13 @@ body {
 
 .evm-header-label {
   font-weight: 700;
-  margin-right: 6px;
+  margin-right: 4px;
 }
 
 .evm-header-led {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 999px;
   border: 1px solid #166534;
   vertical-align: middle;
@@ -101,27 +108,31 @@ body {
   background: #22c55e;
 }
 
-/* Body / ballot area */
+/* Ballot body */
 
 .evm-body {
   background: #f9fafb;
   border-radius: 18px;
   border: 1px solid #e4e4e7;
-  padding: 10px 0 12px;
+  padding: 6px 0 8px;
 }
 
-/* ---------- Table-style grid ---------- */
+/* ======================
+   TABLE-LIKE GRID
+   ====================== */
 
 .evm-table {
   width: 100%;
-  border-collapse: collapse;
 }
 
+/* Each row = grid with 5 columns:
+   [SLNO] [Candidate] [Symbol] [LED] [Button]
+*/
 .evm-row {
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr) 110px 60px 120px;
+  grid-template-columns: 32px minmax(0, 1fr) 56px 26px 72px;
   align-items: stretch;
-  min-height: 42px;
+  min-height: 38px;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -134,13 +145,14 @@ body {
 .evm-cell {
   display: flex;
   align-items: center;
-  padding: 6px 10px;
-  font-size: 15px;
+  padding: 4px 6px;
+  font-size: 14px;
 }
 
 .evm-cell--slno {
   border-right: 1px solid #e5e7eb;
   justify-content: center;
+  font-size: 13px;
 }
 
 .evm-cell--candidate {
@@ -161,29 +173,29 @@ body {
   justify-content: center;
 }
 
-/* Candidate text */
+/* Candidate text (Malayalam bigger, others smaller) */
 
 .candidate-name-ml {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .candidate-name-en {
-  font-size: 13px;
+  font-size: 11px;
   color: #4b5563;
 }
 
 .candidate-party {
-  font-size: 12px;
+  font-size: 11px;
   color: #6b7280;
 }
 
-/* Symbol */
+/* Symbol box */
 
 .symbol-box {
-  width: 64px;
-  height: 40px;
+  width: 44px;
+  height: 28px;
   border-radius: 6px;
   border: 1px solid #d4d4d8;
   background: #ffffff;
@@ -193,15 +205,15 @@ body {
 }
 
 .symbol-box img {
-  max-height: 30px;
-  max-width: 56px;
+  max-height: 22px;
+  max-width: 38px;
 }
 
 /* LED + Button */
 
 .led-dot {
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
   border-radius: 999px;
   background: #991b1b; /* red */
   border: 2px solid #7f1d1d;
@@ -218,13 +230,13 @@ body {
 }
 
 .vote-button {
-  width: 96px;
-  height: 36px;
-  border-radius: 18px;
+  width: 66px;
+  height: 30px;
+  border-radius: 16px;
   border: none;
   background: #0f3c86; /* dark blue like EVM */
   cursor: pointer;
-  box-shadow: 0 3px 0 #082f49;
+  box-shadow: 0 2px 0 #082f49;
 }
 
 .vote-button:active {
@@ -244,13 +256,16 @@ body {
   background: #e0f2fe;
 }
 
-/* ---------- Status bar below device ---------- */
+/* ======================
+   STATUS BAR
+   ====================== */
 
 .status-bar {
-  margin-top: 10px;
+  margin-top: 8px;
   display: flex;
-  justify-content: space-between;
-  font-size: 14px;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
   color: #374151;
 }
 
@@ -258,17 +273,19 @@ body {
   font-weight: 600;
 }
 
-/* ---------- Toast ---------- */
+/* ======================
+   TOAST
+   ====================== */
 
 .toast {
   position: fixed;
   left: 50%;
-  bottom: 24px;
+  bottom: 20px;
   transform: translateX(-50%);
-  padding: 8px 16px;
+  padding: 7px 14px;
   background: #16a34a;
   color: #f9fafb;
-  font-size: 14px;
+  font-size: 13px;
   border-radius: 999px;
   opacity: 0;
   pointer-events: none;
@@ -279,176 +296,81 @@ body {
   opacity: 1;
 }
 
-/* ---------- Responsive ---------- */
+/* ======================
+   LARGER SCREENS
+   (scale up for tablets/desktop)
+   ====================== */
 
-@media (max-width: 768px) {
-  .evm-row {
-    grid-template-columns: 50px minmax(0, 1fr) 90px 52px 90px;
+@media (min-width: 640px) {
+  .page {
+    max-width: 900px;
+    margin-top: 24px;
+    padding: 0 16px;
+  }
+
+  .top-tabs {
+    gap: 16px;
+  }
+
+  .tab {
+    max-width: 160px;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .evm-device {
+    padding: 16px;
+    border-radius: 28px;
   }
 
   .evm-header {
-    padding-inline: 12px;
+    padding: 12px 24px;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  .evm-row {
+    grid-template-columns: 70px minmax(0, 1fr) 110px 60px 120px;
+    min-height: 42px;
+  }
+
+  .evm-cell {
+    padding: 6px 10px;
+    font-size: 15px;
+  }
+
+  .candidate-name-ml {
+    font-size: 17px;
+  }
+  .candidate-name-en,
+  .candidate-party {
+    font-size: 12px;
+  }
+
+  .symbol-box {
+    width: 64px;
+    height: 40px;
+  }
+
+  .symbol-box img {
+    max-height: 30px;
+    max-width: 56px;
+  }
+
+  .led-dot {
+    width: 18px;
+    height: 18px;
+  }
+
+  .vote-button {
+    width: 96px;
+    height: 36px;
+    border-radius: 18px;
   }
 
   .status-bar {
-    flex-direction: column;
-    gap: 4px;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 14px;
   }
-}
-
-/* ==========================
-   VVPAT PAGE (NEW)
-========================== */
-
-.vvpat-page {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(#ffffff 0%, #d7d7d7 50%, #bfa670 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 5000;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.vvpat-wrapper {
-  text-align: center;
-  width: 90%;
-  max-width: 420px;
-}
-
-.vvpat-card {
-  background: #ffffff;
-  padding: 16px;
-  border-radius: 16px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-}
-
-.vvpat-photo-box {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.vvpat-photo-box img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.vvpat-voted-chip {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: #0f3c86;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.vvpat-info {
-  text-align: left;
-  padding-top: 10px;
-}
-
-.vvpat-name-ml {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.vvpat-name-en {
-  font-size: 14px;
-  color: #555;
-}
-
-.vvpat-ward {
-  font-size: 12px;
-  color: #777;
-  margin-top: 4px;
-}
-
-.vvpat-symbol-section {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 18px;
-}
-
-.vvpat-symbol-big {
-  width: 90px;
-  height: auto;
-}
-
-.vvpat-btn {
-  margin-top: 18px;
-  padding: 10px 24px;
-  font-size: 15px;
-  background: white;
-  border: none;
-  border-radius: 24px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-
-/* ---------- Confirmation Overlay ---------- */
-
-.confirm-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.confirm-overlay--show {
-  display: flex;
-}
-
-.confirm-box {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 16px 20px;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.35);
-  min-width: 260px;
-  max-width: 320px;
-  text-align: center;
-  font-size: 14px;
-  color: #111827;
-}
-
-.confirm-text {
-  margin-bottom: 12px;
-}
-
-.confirm-name-ml {
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-.confirm-name-en {
-  font-size: 13px;
-  color: #4b5563;
-}
-
-.confirm-ok-btn {
-  margin-top: 4px;
-  padding: 6px 18px;
-  border-radius: 999px;
-  border: none;
-  background: #0f3c86;
-  color: #f9fafb;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.confirm-ok-btn:active {
-  transform: translateY(1px);
 }
