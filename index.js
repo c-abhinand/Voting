@@ -10,14 +10,16 @@ const candidates = [
     name_ml: "ഒന്നാം സ്ഥാനാര്‍ത്ഥി",
     name_en: "Onnam Sthanarthi",
     party: "Sample Party A",
-    symbol: "/assets/chihnam.png",
+    symbol: "assets/randila.png",
+    photo: "assets/candidate.JPG", // NEW: candidate image
   },
   {
     slno: 2,
     name_ml: "രാഹുൽ",
     name_en: "Rahul",
     party: "Sample Party A",
-    symbol: "assets/randila.png",
+    symbol: "assets/symbol-tree.png",
+    photo: "assets/candidate-2.png",
   },
   {
     slno: 3,
@@ -25,6 +27,7 @@ const candidates = [
     name_en: "Aneesh",
     party: "Sample Party B",
     symbol: "assets/symbol-hand.png",
+    photo: "assets/candidate-3.png",
   },
   {
     slno: 4,
@@ -32,6 +35,7 @@ const candidates = [
     name_en: "Indu",
     party: "Independent",
     symbol: "assets/symbol-star.png",
+    photo: "assets/candidate-4.png",
   },
 ];
 
@@ -47,17 +51,26 @@ const statusSelected = document.getElementById("statusSelected");
 const statusVote = document.getElementById("statusVote");
 const toast = document.getElementById("toast");
 const beepSound = document.getElementById("beepSound");
-const confirmOverlay = document.getElementById("confirmOverlay");
-const confirmNameMl = document.getElementById("confirmNameMl");
-const confirmNameEn = document.getElementById("confirmNameEn");
-const confirmOkBtn = document.getElementById("confirmOkBtn");
 
+// NEW: VVPAT DOM references
+const vvpatOverlay = document.getElementById("vvpatOverlay");
+const vvpatNameMl = document.getElementById("vvpatNameMl");
+const vvpatNameEn = document.getElementById("vvpatNameEn");
+const vvpatParty = document.getElementById("vvpatParty");
+const vvpatSymbol = document.getElementById("vvpatSymbol");
+const vvpatPhoto = document.getElementById("vvpatPhoto");
+const vvpatOkBtn = document.getElementById("vvpatOkBtn");
 
 // ---------------- INIT ----------------
 
 function init() {
   renderRows();
   updateStatus();
+
+  // NEW: OK button on VVPAT resets machine
+  if (vvpatOkBtn) {
+    vvpatOkBtn.addEventListener("click", resetMachineForNextVoter);
+  }
 }
 
 function renderRows() {
@@ -171,50 +184,6 @@ function updateStatus() {
   statusVote.textContent = hasVoted ? "Vote Cast" : "Not Cast";
 }
 
-function resetBallotUnit() {
-  hasVoted = false;
-  selectedCandidate = null;
-
-  // Clear row highlight
-  document.querySelectorAll(".evm-row").forEach((r) => {
-    r.classList.remove("evm-row--selected");
-  });
-
-  // Reset LEDs: all non-off LEDs back to red
-  document.querySelectorAll(".led-dot").forEach((l) => {
-    if (!l.classList.contains("led-dot--off")) {
-      l.classList.remove("led-dot--green");
-      l.classList.add("led-dot--red");
-    }
-  });
-
-  // Re-enable vote buttons
-  // Lock all buttons
-  document.querySelectorAll(".vote-button").forEach((b) => {
-    b.classList.add("vote-button--disabled");
-    b.disabled = true;
-  });
-
-  // Show confirmation overlay with candidate name
-  if (confirmOverlay && confirmNameMl && confirmNameEn) {
-    confirmNameMl.textContent = candidate.name_ml;
-    confirmNameEn.textContent = candidate.name_en;
-    confirmOverlay.classList.add("confirm-overlay--show");
-  }
-
-  showToast();
-}
-
-// Attach OK button listener (if element exists)
-if (confirmOkBtn) {
-  confirmOkBtn.addEventListener("click", () => {
-    if (confirmOverlay) {
-      confirmOverlay.classList.remove("confirm-overlay--show");
-    }
-    resetBallotUnit(); // ready for next voter
-  });
-}
-
 // ---------------- HANDLERS ----------------
 
 function handleVoteClick(candidate, rowEl, ledEl, btnEl) {
@@ -255,53 +224,54 @@ function handleVoteClick(candidate, rowEl, ledEl, btnEl) {
   });
 
   showToast();
-  showVVPAT(candidate); // NEW
-
+  showVvpat(candidate); // NEW: open VVPAT page
 }
 
 function showToast() {
-
   toast.classList.add("toast--show");
   setTimeout(() => {
     toast.classList.remove("toast--show");
   }, 1500);
 }
 
+// NEW: show VVPAT overlay with candidate details
+function showVvpat(candidate) {
+  if (!vvpatOverlay) return;
 
+  vvpatNameMl.textContent = candidate.name_ml || "";
+  vvpatNameEn.textContent = candidate.name_en || "";
+  vvpatParty.textContent = candidate.party || "";
+
+  if (candidate.symbol) {
+    vvpatSymbol.src = candidate.symbol;
+    vvpatSymbol.style.display = "block";
+  } else {
+    vvpatSymbol.style.display = "none";
+  }
+
+  if (candidate.photo) {
+    vvpatPhoto.src = candidate.photo;
+  } else {
+    vvpatPhoto.src = "";
+  }
+
+  vvpatOverlay.classList.remove("hidden");
+}
+
+// NEW: reset everything for the next voter
+function resetMachineForNextVoter() {
+  hasVoted = false;
+  selectedCandidate = null;
+
+  // Hide VVPAT page
+  if (vvpatOverlay) {
+    vvpatOverlay.classList.add("hidden");
+  }
+
+  // Re-render rows & status
+  renderRows();
+  updateStatus();
+}
 
 // ---------------- START ----------------
 init();
-
-
-
-
-/* ================================
-   VVPAT PAGE FUNCTIONS (NEW)
-================================ */
-
-function showVVPAT(candidate) {
-  const page = document.getElementById("vvpatPage");
-  const nameMl = document.getElementById("vvpatNameMl");
-  const nameEn = document.getElementById("vvpatNameEn");
-  const ward = document.getElementById("vvpatWard");
-  const photo = document.getElementById("vvpatPhoto");
-  const symbolBig = document.getElementById("vvpatSymbolBig");
-
-  // FILL DETAILS
-  nameMl.textContent = candidate.name_ml;
-  nameEn.textContent = candidate.name_en;
-  ward.textContent = candidate.party + " • Ward 1"; // you can replace ward data later
-  photo.src = candidate.photo || "assets/default.jpg"; // fallback image
-  symbolBig.src = candidate.symbol;
-
-  // SHOW PAGE
-  page.classList.remove("hidden");
-}
-
-// CLOSE VVPAT PAGE
-document.getElementById("vvpatCloseBtn").addEventListener("click", () => {
-  document.getElementById("vvpatPage").classList.add("hidden");
-  // If you want restart voting: window.location.reload();
-});
-
-
