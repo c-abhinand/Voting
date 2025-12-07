@@ -10,11 +10,11 @@ const candidates = [
     name_ml: "എ ടി കുഞ്ഞമ്മദ്",
     name_en: "A T Kunjammed",
     party: "CPIM",
-    symbol: "assets/randila.png",
-    photo: "assets/candidate.JPG", // NEW: candidate image
+    symbol: "assets/arival.png",
+    photo: "assets/candidate.png", // NEW: candidate image
   },
  
-
+  
 ];
 
 // ---------------- STATE ----------------
@@ -180,12 +180,12 @@ function handleVoteClick(candidate, rowEl, ledEl, btnEl) {
     }
   });
 
-  // Highlight current row and LED
+  // Highlight row & LED
   rowEl.classList.add("evm-row--selected");
   ledEl.classList.remove("led-dot--red");
   ledEl.classList.add("led-dot--green");
 
-  // Play beep sound
+  // Play beep
   if (beepSound) {
     beepSound.currentTime = 0;
     beepSound.play().catch(() => {});
@@ -195,15 +195,20 @@ function handleVoteClick(candidate, rowEl, ledEl, btnEl) {
   hasVoted = true;
   updateStatus();
 
-  // Lock all buttons
+  // Lock buttons
   document.querySelectorAll(".vote-button").forEach((b) => {
     b.classList.add("vote-button--disabled");
     b.disabled = true;
   });
 
   showToast();
-  showVvpat(candidate); // NEW: open VVPAT page
+
+  // ⭐ Delay VVPAT by 3 seconds
+  setTimeout(() => {
+    showVvpat(candidate);
+  }, 3000);
 }
+
 
 function showToast() {
   toast.classList.add("toast--show");
