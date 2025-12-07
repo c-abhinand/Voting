@@ -7,35 +7,23 @@ const MAX_ROWS = 10;
 const candidates = [
   {
     slno: 1,
-    name_ml: "ഒന്നാം സ്ഥാനാര്‍ത്ഥി",
-    name_en: "Onnam Sthanarthi",
-    party: "Sample Party A",
+    name_ml: "എ ടി കുഞ്ഞമ്മദ്",
+    name_en: "A T Kunjammed",
+    party: "CPIM",
     symbol: "assets/randila.png",
     photo: "assets/candidate.JPG", // NEW: candidate image
   },
   {
     slno: 2,
-    name_ml: "രാഹുൽ",
-    name_en: "Rahul",
-    party: "Sample Party A",
-    symbol: "assets/symbol-tree.png",
-    photo: "assets/candidate-2.png",
+   
   },
   {
     slno: 3,
-    name_ml: "അനീഷ്",
-    name_en: "Aneesh",
-    party: "Sample Party B",
-    symbol: "assets/symbol-hand.png",
-    photo: "assets/candidate-3.png",
+    
   },
   {
     slno: 4,
-    name_ml: "ഇന്ദു",
-    name_en: "Indu",
-    party: "Independent",
-    symbol: "assets/symbol-star.png",
-    photo: "assets/candidate-4.png",
+    
   },
 ];
 
